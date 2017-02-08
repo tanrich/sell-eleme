@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/src/router/index-compiled.js" />
+        <item url="file://$PROJECT_DIR$/src/main-compiled.js" />
+        <item url="file://$PROJECT_DIR$/build/webpack.base.conf-compiled.js" />
+        <item url="file://$PROJECT_DIR$/.eslintrc-compiled.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/build/dev-server-compiled.js" />
+      <root url="file://$PROJECT_DIR$/src/router/index-compiled.js" />
+      <root url="file://$PROJECT_DIR$/src/main-compiled.js" />
+      <root url="file://$PROJECT_DIR$/build/webpack.base.conf-compiled.js" />
+      <root url="file://$PROJECT_DIR$/.eslintrc-compiled.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
