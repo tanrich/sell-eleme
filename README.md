@@ -1,21 +1,21 @@
-# sell
+# 仿eleme项目
 
-> sell
+> sell-eleme
 
 ## Build Setup
 
 ``` bash
-# install dependencies
+# 项目根目录安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 浏览器访问localhost:8000
 npm run dev
 
-# build for production with minification
+# 打包编译生成静态资源
 npm run build
 
-# build for production and view the bundle analyzer report
+# 打包编译生成静态资源并生成分析报告
 npm run build --report
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+利用Vue-cli + Webpack搭建环境， 使用Vue2,Vue-router,Vue-resource编写。本人第一个vue项目，意在练手。
