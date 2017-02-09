@@ -9,7 +9,7 @@
   const HALF = 'half';
   const OFF = 'off';
   export default {
-    name: '',
+    name: 'star',
     data () {
       return {}
     },

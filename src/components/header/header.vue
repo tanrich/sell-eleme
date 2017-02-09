@@ -13,7 +13,7 @@
           {{seller.description}}/{{seller.deliveryTime}}分钟送达
         </div>
         <div class="supports" v-if="seller.supports">
-          <span class="icon" :class="classMap[seller.supports[0].type]"></span>
+          <type :type="seller.supports[0].type" size="12px" colorType="1"></type>
           <span class="support-description">{{seller.supports[0].description}}</span>
         </div>
       </div>
@@ -45,7 +45,7 @@
             </div>
             <ul class="discount-info">
               <li class="discount-detail" v-if="seller.supports" v-for="item in seller.supports">
-                <span class="icon" :class="classMap[item.type]"></span>
+                <type :type="item.type" size="16px" colorType="1"></type>
                 <span class="text">{{item.description}}</span>
               </li>
             </ul>
@@ -62,11 +62,11 @@
         </div>
       </div>
     </transition>
-
   </div>
 </template>
 <script type="text/ecmascript-6">
   import star from 'components/star/star'
+  import type from 'components/type/type'
   export default {
     name: 'header',
     data () {
@@ -76,12 +76,9 @@
       }
     },
     components: {
-      star
+      star,type
     },
     props: ['seller'],
-    created () {
-      this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
-    },
     methods: {
       showDetail () {
         this.detailShow = true;
@@ -140,23 +137,6 @@
           font-weight: 100
           line-height: 12px
         .supports
-          .icon
-            display: inline-block
-            width: 12px
-            height: 12px
-            vertical-align: top
-            background-size: 12px 12px
-            background-repeat: no-repeat
-            &.decrease
-              bg-image-1('decrease')
-            &.discount
-              bg-image-1('discount')
-            &.special
-              bg-image-1('special')
-            &.invoice
-              bg-image-1('invoice')
-            &.guarantee
-              bg-image-1('guarantee')
           .support-description
             display: inline-block
             font-size: 10px
@@ -241,7 +221,7 @@
         min-height: 100%
         .detail-info
           margin-top: 64px
-          padding-bottom: 64px
+          padding-bottom: 80px
           .name
             line-height: 16px
             font-size: 16px
@@ -276,30 +256,12 @@
               margin-bottom: 12px
               &.last-child
                 margin-bottom 0
-              .icon
-                display inline-block
-                width: 16px
-                height: 16px
-                background-size 16px 16px
-                background-repeat no-repeat
-                vertical-align top
-                &.decrease
-                  bg-image-2('decrease')
-                &.discount
-                  bg-image-2('discount')
-                &.special
-                  bg-image-2('special')
-                &.invoice
-                  bg-image-2('invoice')
-                &.guarantee
-                  bg-image-2('guarantee')
               .text
                 display inline-block
                 margin-left 6px
                 font-size: 12px
                 font-weight: 200
                 line-height 16px
-
           .bulletin
             width: 80%
             margin: 0 auto

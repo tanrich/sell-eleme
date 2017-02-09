@@ -10,6 +10,10 @@ import Seller from 'components/seller/seller'
 export default new Router({
   routes: [
     {
+      path: '/',
+      component: Goods
+    },
+    {
       path: '/goods',
       component: Goods
     },
