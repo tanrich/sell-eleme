@@ -30,17 +30,43 @@
     <div class="bg">
       <img :src="seller.avatar">
     </div>
-    <div class="detail" v-show="detailShow">
-      <div class="detail-wrapper clearfix">
-        <div class="detail-info"></div>
+    <transition name="show">
+      <div class="detail" v-show="detailShow">
+        <div class="detail-wrapper clearfix">
+          <div class="detail-info">
+            <h1 class="name">{{seller.name}}</h1>
+            <div class="star-position">
+              <star :size="48" :score="seller.score"></star>
+            </div>
+            <div class="title">
+              <div class="line"></div>
+              <div class="text">优惠信息</div>
+              <div class="line"></div>
+            </div>
+            <ul class="discount-info">
+              <li class="discount-detail" v-if="seller.supports" v-for="item in seller.supports">
+                <span class="icon" :class="classMap[item.type]"></span>
+                <span class="text">{{item.description}}</span>
+              </li>
+            </ul>
+            <div class="title">
+              <div class="line"></div>
+              <div class="text">商家公告</div>
+              <div class="line"></div>
+            </div>
+            <p class="bulletin">{{seller.bulletin}}</p>
+          </div>
+        </div>
+        <div class="detail-close" @click="closeDetail">
+          <i class="icon-close"></i>
+        </div>
       </div>
-      <div class="detail-close" @click="closeDetail">
-        <i class="icon-close"></i>
-      </div>
-    </div>
+    </transition>
+
   </div>
 </template>
 <script type="text/ecmascript-6">
+  import star from 'components/star/star'
   export default {
     name: 'header',
     data () {
@@ -48,6 +74,9 @@
         classMap: [],
         detailShow: false
       }
+    },
+    components: {
+      star
     },
     props: ['seller'],
     created () {
@@ -192,20 +221,92 @@
         width: 100%
         height: 100%
         filter: blur(10px)
+    .show-enter,.show-leave-active
+      opacity: 0
+    .show-enter-active,.show-leave-active
+      transition: all 0.5s
     .detail
       position: fixed
       z-index: 100
       width: 100%
       height: 100%
       overflow: auto
-      background-color: rgba(7, 17, 27, 0.8)
       top: 0;
       left: 0;
+      background rgba(7, 17, 27, 0.8)
+      -webkit-backdrop-filter blur(10px)
+      backdrop-filter blur(10px)
       .detail-wrapper
+        width: 100%
         min-height: 100%
         .detail-info
           margin-top: 64px
           padding-bottom: 64px
+          .name
+            line-height: 16px
+            font-size: 16px
+            font-weight: 700
+            text-align: center
+            color: #fff
+          .star-position
+            padding: 2px 0
+            text-align: center
+            margin-top: 16px;
+          .title
+            width: 80%
+            margin: 28px auto 24px
+            display: flex
+            .text
+              width: 64px
+              padding: 0 12px
+              font-size: 14px
+              text-align: center
+              font-weight: 700
+            .line
+              flex: 1
+              position: relative
+              top: -7px
+              border-bottom: 1px solid rgba(255, 255, 255, .2)
+          .discount-info
+            width 80%
+            margin 24px auto 0
+            font-size: 0
+            .discount-detail
+              padding: 0 12px
+              margin-bottom: 12px
+              &.last-child
+                margin-bottom 0
+              .icon
+                display inline-block
+                width: 16px
+                height: 16px
+                background-size 16px 16px
+                background-repeat no-repeat
+                vertical-align top
+                &.decrease
+                  bg-image-2('decrease')
+                &.discount
+                  bg-image-2('discount')
+                &.special
+                  bg-image-2('special')
+                &.invoice
+                  bg-image-2('invoice')
+                &.guarantee
+                  bg-image-2('guarantee')
+              .text
+                display inline-block
+                margin-left 6px
+                font-size: 12px
+                font-weight: 200
+                line-height 16px
+
+          .bulletin
+            width: 80%
+            margin: 0 auto
+            padding 0 12px
+            font-size 12px
+            font-weight 200
+            line-height 24px
       .detail-close
         position: relative
         width: 32px

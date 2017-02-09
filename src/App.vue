@@ -32,9 +32,9 @@
     },
     created () {
       this.$http.get('/api/seller').then(res => {
-        res = res.body
+        res = res.body;
         if (res.errno === 0) {
-          this.seller = res.data
+          this.seller = res.data;
         }
       })
     },

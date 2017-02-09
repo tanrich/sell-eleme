@@ -1,5 +1,5 @@
 <template>
-  <div class="goods">我是商品</div>
+  <div class="goods"></div>
 </template>
 <script type="text/ecmascript-6">
   export default {
