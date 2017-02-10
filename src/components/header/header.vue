@@ -1,5 +1,6 @@
 <template>
   <div id="header">
+    <!--各种信息-->
     <div class="content-wrapper">
       <div class="avatar">
         <img :src="seller.avatar" class="seller-avatar">
@@ -22,19 +23,24 @@
         <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div>
+    <!--公告栏-->
     <div class="notice-wrapper" @click="showDetail">
       <span class="icon"></span>
       <span class="bulletin">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
     </div>
+    <!--背景图片-->
     <div class="bg">
       <img :src="seller.avatar">
     </div>
+    <!--商家详情信息-->
     <transition name="show">
       <div class="detail" v-show="detailShow">
+        <!--详情-->
         <div class="detail-wrapper clearfix">
           <div class="detail-info">
             <h1 class="name">{{seller.name}}</h1>
+            <!--星级-->
             <div class="star-position">
               <star :size="48" :score="seller.score"></star>
             </div>
@@ -43,6 +49,7 @@
               <div class="text">优惠信息</div>
               <div class="line"></div>
             </div>
+            <!--优惠信息-->
             <ul class="discount-info">
               <li class="discount-detail" v-if="seller.supports" v-for="item in seller.supports">
                 <type :type="item.type" size="16px" colorType="1"></type>
@@ -57,9 +64,11 @@
             <p class="bulletin">{{seller.bulletin}}</p>
           </div>
         </div>
+        <!--关闭按钮-->
         <div class="detail-close" @click="closeDetail">
           <i class="icon-close"></i>
         </div>
+        <!--sticky footer布局-->
       </div>
     </transition>
   </div>
@@ -254,7 +263,7 @@
             .discount-detail
               padding: 0 12px
               margin-bottom: 12px
-              &.last-child
+              &:last-child
                 margin-bottom 0
               .text
                 display inline-block

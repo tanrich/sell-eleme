@@ -1,5 +1,5 @@
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)
-  .border-1px,.border-4px
+  .border-1px-top
     &::after
       -webkit-transform: scaleY(0.7)
       -moz-transform: scaleY(0.7)
@@ -8,7 +8,7 @@
       transform: scaleY(0.7)
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)
-  .border-1px,.border-4px
+  .border-1px-top
     &::after
       -webkit-transform: scaleY(0.5)
       -moz-transform: scaleY(0.5)
@@ -17,7 +17,7 @@
       transform: scaleY(0.5)
 
 @media only screen and (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
-  .border-1px,.border-4px
+  .border-1px-top
     &::after
       -webkit-transform: scaleY(0.3)
       -moz-transform: scaleY(0.3)
@@ -26,13 +26,49 @@
       transform: scaleY(0.3)
 
 @media only screen and (-webkit-min-device-pixel-ratio: 4),(min-device-pixel-ratio: 4)
-  .border-1px,.border-4px
+  .border-1px-top
     &::after
       -webkit-transform: scaleY(0.25)
       -moz-transform: scaleY(0.25)
       -ms-transform: scaleY(0.25)
       -o-transform: scaleY(0.25)
       transform: scaleY(0.25)
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)
+  .border-2px-left, .border-1px-right
+    &::after
+      -webkit-transform: scaleX(0.7)
+      -moz-transform: scaleX(0.7)
+      -ms-transform: scaleX(0.7)
+      -o-transform: scaleX(0.7)
+      transform: scaleX(0.7)
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)
+  .border-2px-left, .border-1px-right
+    &::after
+      -webkit-transform: scaleX(0.5)
+      -moz-transform: scaleX(0.5)
+      -ms-transform: scaleX(0.5)
+      -o-transform: scaleX(0.5)
+      transform: scaleX(0.5)
+
+@media only screen and (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+  .border-2px-left, .border-1px-right
+    &::after
+      -webkit-transform: scaleX(0.3)
+      -moz-transform: scaleX(0.3)
+      -ms-transform: scaleX(0.3)
+      -o-transform: scaleX(0.3)
+      transform: scaleX(0.3)
+
+@media only screen and (-webkit-min-device-pixel-ratio: 4),(min-device-pixel-ratio: 4)
+  .border-2px-left, .border-1px-right
+    &::after
+      -webkit-transform: scaleX(0.25)
+      -moz-transform: scaleX(0.25)
+      -ms-transform: scaleX(0.25)
+      -o-transform: scaleX(0.25)
+      transform: scaleX(0.25)
 
 .clearfix
   display: inline-block

@@ -1,4 +1,4 @@
-border-1px($color)
+border-1px-top($color)
   position: relative
   &::after
     display: block
@@ -9,7 +9,7 @@ border-1px($color)
     left: 0
     border-top: 1px solid $color
 
-border-4px($color)
+border-2px-left($color)
   position: relative
   &::after
     display: block
@@ -18,9 +18,20 @@ border-4px($color)
     content: ''
     left: 0
     top: 0
-    border-left 4px solid $color
+    border-left 2px solid $color
 
-
-border-none
+border-none()
   &::after
     display none
+
+
+border-1px-right($color)
+  position: relative
+  &::after
+    display: block
+    position: absolute
+    height: 100%
+    content: ''
+    right: 0
+    top: 0
+    border-right 1px solid $color
