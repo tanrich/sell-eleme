@@ -37,15 +37,7 @@
         type: Number
       },
       selectFoods: {
-        type: Array,
-        default () {
-          return [
-            {
-              price: 10,
-              count: 90
-            }
-          ]
-        }
+        type: Array
       }
     },
     computed: {

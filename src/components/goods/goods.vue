@@ -40,7 +40,7 @@
               </div>
               <!--数量按钮-->
               <div class="countbt">
-                <countbutton></countbutton>
+                <countbutton :info="info"></countbutton>
               </div>
             </li>
           </ul>
@@ -48,7 +48,7 @@
       </ul>
     </div>
     <!--购物车-->
-    <shopcar :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcar>
+    <shopcar :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcar>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -60,7 +60,7 @@
     name: 'goods',
     data () {
       return {
-        goods: {},
+        goods: [],
         itemListHeight: [],
         scrollY: 0
       }
@@ -93,6 +93,17 @@
           }
         }
         return 0;
+      },
+      selectFoods () {
+        let selectFood = [];
+        this.goods.forEach((item) => {
+          item.foods.forEach((info) => {
+            if (info.count) {
+              selectFood.push(info);
+            }
+          });
+        });
+        return selectFood;
       }
     },
     methods: {
