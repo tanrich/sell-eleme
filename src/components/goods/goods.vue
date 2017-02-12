@@ -48,7 +48,12 @@
       </ul>
     </div>
     <!--购物车-->
-    <shop-car ref="shopCar" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shop-car>
+    <shop-car ref="shopCar" @mask_show="_maskShow" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice"
+              :minPrice="seller.minPrice"></shop-car>
+    <!--遮罩层-->
+    <transition name="mask">
+      <div class="mask" v-show="maskShow" @click="_maskHide"></div>
+    </transition>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -62,7 +67,8 @@
       return {
         goods: [],
         itemListHeight: [],
-        scrollY: 0
+        scrollY: 0,
+        maskShow: false
       }
     },
     components: {
@@ -144,8 +150,20 @@
         let el = foodsWrapper[index];
         this.foodsScroll.scrollToElement(el, 300);
       },
+      // 触发小球下落的动画
       _drop (target) {
-        this.$refs.shopCar.drop(target);
+        // 异步更新队列优化动画
+        this.$nextTick(() => {
+          this.$refs.shopCar.drop(target);
+        })
+      },
+      _maskShow (value) {
+        this.maskShow = value;
+        console.log(this.maskShow)
+      },
+      _maskHide () {
+        this.maskShow = false;
+        this.$refs.shopCar.toggleShow();
       }
     }
   }
@@ -250,4 +268,18 @@
             position: absolute
             right 0
             bottom 12px
+    .mask
+      position: fixed
+      width 100%
+      height 100%
+      z-index 98
+      top 0
+      left 0
+      background rgba(7, 17, 27, .6)
+      bacdrop-filter blur(10px)
+      &.mask-enter, &.mask-leave-active
+        opacity 0
+        background rgba(7, 17, 27, 0)
+      &.mask-enter-active, &.mask-leave-active
+        transition all .5s
 </style>

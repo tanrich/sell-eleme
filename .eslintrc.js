@@ -28,7 +28,6 @@ module.exports = {
     'no-trailing-spaces': 0,
     //封闭作用于分号
     'semi': 0,
-    'comma-spacing': 0,
-    'indent': 0
+    'comma-spacing': 0
   }
 }

@@ -50,11 +50,11 @@
     font-size 0
     .add-wrapper
       display inline-block
-    .showButton-enter, .showButton-leave-active
-      opacity 0
-      transform translate3d(30px, 0, 0) rotate(90deg)
-    .showButton-enter-active, .showButton-leave-active
-      transition all .3s
+      &.showButton-enter, &.showButton-leave-active
+        opacity 0
+        transform translate3d(30px, 0, 0) rotate(90deg)
+      &.showButton-enter-active, &.showButton-leave-active
+        transition all .3s
     .count-num
       display inline-block
       vertical-align top

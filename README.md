@@ -34,3 +34,15 @@ npm run build --report
   	+ answer:
 
   		none	
+
+- <span style="text-decoration:line-through">css过渡动画(已解决)
+
+	+ question:
+
+		为什么css动画enter,enter-active,leave,leave-acitve不生效？
+		
+	+ answer
+		
+		1. 需要将css类名写在v-show相对应元素下
+		2. enter只加载一瞬间，enter-active属性就会覆盖，所以不能像vue1.0一样写出动画结束样式。只能在默认属性中直接定义。enter-active作用相当于定义transition
+			 
