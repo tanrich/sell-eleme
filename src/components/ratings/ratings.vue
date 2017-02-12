@@ -9,6 +9,6 @@
     }
   }
 </script>
-<style lang="less" rel="stylesheet/less">
+<style lang="stylus" rel="stylesheet/stylus">
 
 </style>

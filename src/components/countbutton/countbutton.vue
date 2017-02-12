@@ -12,7 +12,7 @@
 <script type="text/ecmascript-6">
   import Vue from 'vue'
   export default {
-    name: 'countbutton',
+    name: 'countButton',
     data () {
       return {}
     },
@@ -32,6 +32,7 @@
         } else {
           this.info.count++;
         }
+        this.$emit('add_count', event.target)
       },
       removeCount (event) {
         if (!event._constructed) {

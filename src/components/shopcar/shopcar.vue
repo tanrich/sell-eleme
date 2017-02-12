@@ -10,6 +10,18 @@
         </div>
         <div class="price border-1px-right">￥{{totalPrice}}</div>
         <div class="extra">另需配送费￥{{deliveryPrice}}元</div>
+        <div class="ball-wrapper">
+          <transition
+            v-for="ball in balls"
+            @before-enter="beforeEnter"
+            @enter="enter"
+            @after-enter="afterEnter"
+          >
+            <div v-show="ball.show" class="ball">
+              <div class="inner inner-hook"></div>
+            </div>
+          </transition>
+        </div>
       </div>
       <div class="content-right">
         <div class="text" :class="{highLight:!disparity}">{{disparityPrice}}</div>
@@ -18,16 +30,39 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-  import countbutton from 'components/countbutton/countbutton'
+  import countButton from 'components/countbutton/countbutton'
   export default {
-    name: 'shopcar',
+    name: 'shopCar',
     data () {
       return {
-        disparity: true
+        disparity: true,
+        balls: [
+          {
+            show: false,
+            index: 0
+          },
+          {
+            show: false,
+            index: 1
+          },
+          {
+            show: false,
+            index: 2
+          },
+          {
+            show: false,
+            index: 3
+          },
+          {
+            show: false,
+            index: 4
+          }
+        ],
+        showBalls: []
       }
     },
     components: {
-      countbutton
+      countButton
     },
     props: {
       minPrice: {
@@ -61,11 +96,64 @@
           return `￥${this.minPrice}起送`
         } else if (this.totalPrice < this.minPrice) {
           this.disparity = true;
-          return `￥还差${this.minPrice}起送`
+          return `￥还差${this.minPrice - this.totalPrice}起送`
         } else {
           this.disparity = false;
           return '去结算'
         }
+      }
+    },
+    methods: {
+      drop (target) {
+        for (let i = 0; i < this.balls.length; i++) {
+          let ball = this.balls[i];
+          if (!ball.show) {
+            ball.show = true;
+            ball.target = target;
+            this.showBalls.push(ball);
+            return;
+          }
+        }
+      },
+      beforeEnter (el) {
+        let ballCount = this.balls.length;
+        while (ballCount--) {
+          let ball = this.balls[ballCount];
+          if (ball.show) {
+            let pos = ball.target.getBoundingClientRect();
+            let x = pos.left - 40;
+            let y = -(window.innerHeight - pos.top - 70);
+            el.style.display = '';
+            el.style.webkitTransform = `translate3d(0,${y}px,0)`;
+            el.style.transform = `translate3d(0,${y}px,0)`;
+            let inner = el.getElementsByClassName('inner-hook')[0];
+            inner.style.webkitTransform = `translate3d(${x}px,0,0)`;
+            inner.style.transform = `translate3d(${x}px,0,0)`;
+            return;
+          }
+        }
+      },
+      enter (el, done) {
+        /* eslint-disable no-unused-vars */
+        // refresh作用是主动触发浏览器重绘
+        let refresh = el.offsetHeight;
+        this.$nextTick(() => {
+          el.style.webkitTransform = 'translate3d(0,0,0)';
+          el.style.transform = 'translate3d(0,0,0)';
+          let inner = el.getElementsByClassName('inner-hook')[0];
+          inner.style.webkitTransform = 'translate3d(0,0,0)';
+          inner.style.transform = 'translate3d(0,0,0)';
+        });
+        done();
+      },
+      afterEnter (el) {
+        setTimeout(() => {
+          let ball = this.showBalls.shift();
+          if (ball) {
+            ball.show = false;
+            el.style.display = 'none';
+          }
+        }, 500)
       }
     }
   }
@@ -86,6 +174,7 @@
       .content-left
         flex 1
         background #131d26
+        position: relative
         &.highLight
           background: #08121c
         .logo-wrapper
@@ -149,6 +238,20 @@
           color #919396
           margin: 12px 0 0 12px
           vertical-align top
+        .ball-wrapper
+          .ball
+            position: fixed
+            left 40px
+            bottom 70px
+            z-index 200
+            // transition all .7s cubic-bezier(0.49, -0.29, 0.75, 0.41)
+            transition all .5s cubic-bezier(.48,-0.31,.89,.43)
+            .inner
+              width 16px
+              height 16px
+              border-radius 50%
+              background rgb(0, 160, 220)
+              transition all .5s linear
       .content-right
         flex 0 0 105px
         width 105px

@@ -40,7 +40,7 @@
               </div>
               <!--数量按钮-->
               <div class="countbt">
-                <countbutton :info="info"></countbutton>
+                <count-button :info="info" @add_count="_drop"></count-button>
               </div>
             </li>
           </ul>
@@ -48,14 +48,14 @@
       </ul>
     </div>
     <!--购物车-->
-    <shopcar :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcar>
+    <shop-car ref="shopCar" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shop-car>
   </div>
 </template>
 <script type="text/ecmascript-6">
   import type from 'components/type/type'
   import BScroll from 'better-scroll'
-  import shopcar from 'components/shopcar/shopcar'
-  import countbutton from 'components/countbutton/countbutton'
+  import shopCar from 'components/shopcar/shopcar'
+  import countButton from 'components/countbutton/countbutton'
   export default {
     name: 'goods',
     data () {
@@ -66,7 +66,7 @@
       }
     },
     components: {
-      type, shopcar, countbutton
+      type, shopCar, countButton
     },
     props: ['seller'],
     created () {
@@ -143,6 +143,9 @@
         let foodsWrapper = this.$refs['foods-wrapper'].getElementsByClassName('item-list-hook');
         let el = foodsWrapper[index];
         this.foodsScroll.scrollToElement(el, 300);
+      },
+      _drop (target) {
+        this.$refs.shopCar.drop(target);
       }
     }
   }
