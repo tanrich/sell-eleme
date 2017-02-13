@@ -23,7 +23,7 @@
     // 大小类型，尺寸，颜色类型
   }
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/index.styl"
   .icon
     display inline-block

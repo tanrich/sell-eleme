@@ -98,7 +98,7 @@
     }
   }
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/icon.css"
   @import "../../common/stylus/index.styl"
 

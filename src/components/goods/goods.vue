@@ -18,10 +18,10 @@
       <ul>
         <!--商品种类-->
         <li v-for="item in goods" class="item-list item-list-hook">
-          <h1 class="title border-2px-left">{{item.name}}</h1>
+          <h1 class="title">{{item.name}}</h1>
           <ul>
             <!--商品列表-->
-            <li v-for="info in item.foods" class="info-list border-1px-top">
+            <li v-for="info in item.foods" class="info-list border-1px-top" @click="_foodShow(info,$event)">
               <!--商品图片-->
               <div class="icon">
                 <img :src="info.icon">
@@ -54,6 +54,10 @@
     <transition name="mask">
       <div class="mask" v-show="maskShow" @click="_maskHide"></div>
     </transition>
+    <transition name="food">
+      <food class="food-container" v-show="foodShow" :food="food" @foodHide="_foodHide"
+            @add_count="_drop" ref="food-container"></food>
+    </transition>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -61,6 +65,7 @@
   import BScroll from 'better-scroll'
   import shopCar from 'components/shopcar/shopcar'
   import countButton from 'components/countbutton/countbutton'
+  import food from 'components/food/food'
   export default {
     name: 'goods',
     data () {
@@ -68,11 +73,13 @@
         goods: [],
         itemListHeight: [],
         scrollY: 0,
-        maskShow: false
+        maskShow: false,
+        foodShow: false,
+        food: {}
       }
     },
     components: {
-      type, shopCar, countButton
+      type, shopCar, countButton, food
     },
     props: ['seller'],
     created () {
@@ -157,18 +164,27 @@
           this.$refs.shopCar.drop(target);
         })
       },
+      // 遮罩层显示和隐藏
       _maskShow (value) {
         this.maskShow = value;
-        console.log(this.maskShow)
       },
       _maskHide () {
         this.maskShow = false;
         this.$refs.shopCar.toggleShow();
+      },
+      _foodShow (info, event) {
+        this.foodShow = true;
+        this.food = info;
+        this.$refs['food-container'].keepState();
+        this.$refs['food-container'].Scroll();
+      },
+      _foodHide () {
+        this.foodShow = false;
       }
     }
   }
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/index.styl"
   .goods
     width 100%
@@ -215,7 +231,7 @@
           color rgb(147, 153, 159)
           padding-left 14px
           background-color: #f3f5f7
-          border-2px-left(#d9dde1)
+          border-left 2px solid #d9dde1
         .info-list
           position relative
           display flex
@@ -281,5 +297,11 @@
         opacity 0
         background rgba(7, 17, 27, 0)
       &.mask-enter-active, &.mask-leave-active
+        transition all .5s
+    .food-container
+      transform translate3d(0, 0, 0)
+      &.food-enter, &.food-leave-active
+        transform translate3d(100%, 0, 0)
+      &.food-enter-active, &.food-leave-active
         transition all .5s
 </style>

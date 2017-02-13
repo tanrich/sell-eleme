@@ -32,6 +32,7 @@
         } else {
           this.info.count++;
         }
+        // 向父组件传递点击目标
         this.$emit('add_count', event.target)
       },
       removeCount (event) {
@@ -45,7 +46,7 @@
     }
   }
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .count-button
     font-size 0
     .add-wrapper

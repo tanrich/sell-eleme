@@ -1,8 +1,8 @@
 <template>
   <div class="shopCar">
-    <div class="content">
+    <div class="content" @click="toggleShow">
       <!--购物车显示部分-->
-      <div class="content-left" :class="{highLight:totalPrice>0}" @click="toggleShow">
+      <div class="content-left" :class="{highLight:totalPrice>0}">
         <div class="logo-wrapper">
           <div class="logo" :class="{highLight:totalPrice>0}">
             <i class="icon-shopping_cart"></i>
@@ -26,7 +26,7 @@
         </div>
       </div>
       <!--购物车结算部分-->
-      <div class="content-right">
+      <div class="content-right" @click.stop.prevent="pay">
         <div class="text" :class="{highLight:!disparity}">{{disparityPrice}}</div>
       </div>
     </div>
@@ -176,7 +176,7 @@
           if (ball.show) {
             let pos = ball.target.getBoundingClientRect();
             let x = pos.left - 40;
-            let y = -(window.innerHeight - pos.top - 70);
+            let y = -(window.innerHeight - pos.top - 40);
             el.style.display = '';
             el.style.webkitTransform = `translate3d(0,${y}px,0)`;
             el.style.transform = `translate3d(0,${y}px,0)`;
@@ -213,8 +213,7 @@
         // 购物车有商品主动折叠购物车清单
         if (this.totalPrice) {
           this.fold = !this.fold;
-          this.$emit('mask_show',this.carState)
-          console.log(1)
+          this.$emit('mask_show', this.carState)
         } else {
           // 无购买直接点击购物车
           return false;
@@ -223,12 +222,22 @@
       clear () {
         this.selectFoods.forEach((value) => {
           value.count = 0;
+          this.$emit('mask_show', this.carState);
         })
+      },
+      pay () {
+        if (this.totalPrice < this.minPrice) {
+          return false;
+        }
+        let info = window.confirm(`支付金额为${this.totalPrice}元,确认支付？`);
+        if (info) {
+          window.alert(`已成功支付${this.totalPrice}元`);
+        }
       }
     }
   }
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/index.styl"
   .shopCar
     position: fixed
@@ -312,7 +321,7 @@
           .ball
             position: fixed
             left 40px
-            bottom 70px
+            bottom 40px
             z-index 200
             transition all .5s cubic-bezier(.48, -0.31, .89, .43)
             .inner
