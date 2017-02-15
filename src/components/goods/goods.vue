@@ -5,7 +5,7 @@
       <ul>
         <!--商品种类-->
         <li v-for="(item,index) in goods" class="menu-list border-1px" :class="{'highLight':nowIndex===index}"
-            @click="chooseMenu(index,$event)">
+            @click.stop.prevent="chooseMenu(index,$event)">
           <span class="text border-1px">
              <type v-if="item.type>-1" :type="item.type" size="12px" colorType="0"></type>{{item.name}}
           </span>
@@ -21,7 +21,8 @@
           <h1 class="title">{{item.name}}</h1>
           <ul>
             <!--商品列表-->
-            <li v-for="info in item.foods" class="info-list border-1px-top" @click="_foodShow(info,$event)">
+            <li v-for="info in item.foods" class="info-list border-1px-top"
+                @click.stop.prevent="_foodShow(info,$event)">
               <!--商品图片-->
               <div class="icon">
                 <img :src="info.icon">
@@ -30,7 +31,7 @@
                 <div class="name">{{info.name}}</div>
                 <div class="des" v-if="info.description">{{info.description}}</div>
                 <div class="extra">
-                  <span class="sell">月售{{info.sellCount}}份</span><span>好评率{{info.rating}}%</span>
+                  <span class="sell">月售{{info.sellCount}}份</span><span v-if="info.rating">好评率{{info.rating}}%</span>
                 </div>
                 <div class="price">
                   <span class="new"><span class="rmb">￥</span>{{info.price}}</span><span v-if="info.oldPrice"
@@ -52,7 +53,7 @@
               :minPrice="seller.minPrice"></shop-car>
     <!--遮罩层-->
     <transition name="mask">
-      <div class="mask" v-show="maskShow" @click="_maskHide"></div>
+      <div class="mask" v-show="maskShow" @click.stop.prevent="_maskHide()"></div>
     </transition>
     <transition name="food">
       <food class="food-container" v-show="foodShow" :food="food" @foodHide="_foodHide"
@@ -173,6 +174,9 @@
         this.$refs.shopCar.toggleShow();
       },
       _foodShow (info, event) {
+        if (!event._constructed) {
+          return false;
+        }
         this.foodShow = true;
         this.food = info;
         this.$refs['food-container'].keepState();

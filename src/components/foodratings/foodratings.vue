@@ -1,21 +1,21 @@
 <template>
   <div class="foodRatings">
     <div class="rating-type border-1px-bottom">
-      <span class="type all" @click.stop-prevent="select(2,$event)" :class="{active:selectType===2}">
+      <span class="type all" @click.stop.prevent="select(2,$event)" :class="{active:selectType===2}">
         <span class="text">{{description.all}}</span>
         <span class="num">{{ratings.length}}</span>
       </span>
-      <span class="type positive" @click.stop-prevent="select(0,$event)" :class="{active:selectType===1}">
+      <span class="type positive" @click.stop.prevent="select(0,$event)" :class="{active:selectType===0}">
         <span class="text">{{description.positive}}</span>
         <span class="num">{{positiveNum}}</span>
       </span>
-      <span class="type negative" @click.stop-prevent="select(1,$event)" :class="{active:selectType===0}">
+      <span class="type negative" @click.stop.prevent="select(1,$event)" :class="{active:selectType===1}">
         <span class="text">{{description.negative}}</span>
         <span class="num">{{negativeNum}}</span>
       </span>
     </div>
-    <div class="only-content">
-      <i class="icon-check_circle" @click.stop.prevent="toggleContent" :class="{active:onlyContent}"></i>
+    <div class="only-content" @click.stop.prevent="toggleContent($event)">
+      <i class="icon-check_circle" :class="{active:onlyContent}"></i>
       <span class="text">只看有内容的评价</span>
     </div>
   </div>
@@ -23,7 +23,7 @@
 <script type="text/ecmascript-6">
   const ALL = 2;
   const POSITIVE = 0;
-  const NEGTIVE = 1;
+  const NEGATIVE = 1;
   export default {
     name: 'foodRating',
     data () {
@@ -66,7 +66,7 @@
       // 评价消极数量
       negativeNum () {
         const arr = this.ratings.filter((value) => {
-          return value.rateType === NEGTIVE;
+          return value.rateType === NEGATIVE;
         });
         return arr.length;
       }
@@ -77,12 +77,14 @@
           return false;
         }
         this.selectType = selectType;
+        this.$emit('select_type', selectType);
       },
-      toggleContent () {
+      toggleContent (event) {
         if (!event._constructed) {
           return false;
         }
         this.onlyContent = !this.onlyContent;
+        this.$emit('only_content',this.onlyContent);
       }
     }
   }

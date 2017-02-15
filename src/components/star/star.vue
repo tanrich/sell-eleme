@@ -28,10 +28,11 @@
       listClasses () {
         let result = [];
         // 计算规则，<0.5取0，>=0.5且<1取0.5
-        let score = Math.floor(this.score);
-        let hasHalf = (score % 1 !== 0);
-        let interger = Math.floor(score);
-        for (let i = interger; i > 0; i--) {
+        // 这里有一个巧算，保留0.5，先*2向下取整在/2
+        let score = Math.floor(this.score * 2) / 2;
+        let hasHalf = score % 1 !== 0;
+        let integer = Math.floor(score);
+        for (let i = integer; i > 0; i--) {
           result.push(ON);
         }
         if (hasHalf) {
@@ -58,7 +59,7 @@
         height: 10px
         margin-right: 3px
         background-size: 10px 10px
-        &.last-child
+        &:last-child
           margin-right: 0
         &.off
           bg-image('star24_off')
@@ -72,7 +73,7 @@
         height: 15px
         margin-right: 6px
         background-size: 15px 15px
-        &.last-child
+        &:last-child
           margin-right: 0
         &.off
           bg-image('star36_off')
@@ -86,7 +87,7 @@
         height: 20px
         margin-right: 22px
         background-size: 20px 20px
-        &.last-child
+        &:last-child
           margin-right: 0
         &.off
           bg-image('star48_off')

@@ -4,7 +4,7 @@ var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 var eslintFriendlyFormatter = require('eslint-friendly-formatter')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -28,7 +28,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.common.js',
       'src': resolve('src'),
-      'common': resolve('src/commom'),
+      'common': resolve('src/common'),
       'components': resolve('src/components')
     }
   },
