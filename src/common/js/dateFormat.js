@@ -1,6 +1,3 @@
-/**
- * Created by tan on 2017/2/14.
- */
 export function dateFormat (date, format) {
   // fomat示例 YYYY-MM-DD hh:mm:ss
   // 因为年份比较特殊，有YYYY和YY两种

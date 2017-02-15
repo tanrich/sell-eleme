@@ -59,7 +59,7 @@
     .count-num
       display inline-block
       vertical-align top
-      width 12px
+      min-width 14px
       padding-top 6px
       line-height 24px
       text-align center

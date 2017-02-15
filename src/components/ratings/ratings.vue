@@ -84,21 +84,21 @@
         res = res.body;
         if (res.errno === 0) {
           this.ratings = res.data;
-          this._Scroll();
+          this.$nextTick(() => {
+            this._Scroll();
+          });
         }
       })
     },
     methods: {
       _Scroll () {
-        this.$nextTick(() => {
-          if (!this.ratingsScroll) {
-            this.ratingsScroll = new BScroll(this.$refs['ratings'], {
-              click: true
-            })
-          } else {
-            this.ratingsScroll.refresh();
-          }
-        })
+        if (!this.scroll) {
+          this.scroll = new BScroll(this.$refs['ratings'], {
+            click: true
+          })
+        } else {
+          this.scroll.refresh();
+        }
       },
       _getSelectType (selectType) {
         this.selectType = selectType;

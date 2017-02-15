@@ -55,6 +55,9 @@
 <script type="text/ecmascript-6">
   import countButton from 'components/countbutton/countbutton'
   import BScroll from 'better-scroll'
+  // 小球动画起始点位置调整
+  const ADJUSTX = 12;
+  const ADJUSTY = 24;
   export default {
     name: 'shopCar',
     data () {
@@ -175,8 +178,9 @@
           let ball = this.balls[ballCount];
           if (ball.show) {
             let pos = ball.target.getBoundingClientRect();
-            let x = pos.left - 40;
-            let y = -(window.innerHeight - pos.top - 40);
+            let x = pos.left - 44 + ADJUSTX;
+            let y = -(window.innerHeight - pos.top - 16 - ADJUSTY);
+            console.log(x,y)
             el.style.display = '';
             el.style.webkitTransform = `translate3d(0,${y}px,0)`;
             el.style.transform = `translate3d(0,${y}px,0)`;
@@ -320,8 +324,8 @@
         .ball-wrapper
           .ball
             position: fixed
-            left 40px
-            bottom 40px
+            left 44px
+            bottom 16px
             z-index 200
             transition all .5s cubic-bezier(.48, -0.31, .89, .43)
             .inner

@@ -15,7 +15,7 @@
     computed: {
       classMapName () {
         return this.classMap[this.type] + this.size + this.colorType;
-        // 样例 decrease12px3
+        // 样例 decrease12px0
         // 减 12px尺寸 彩底白字
       }
     },
@@ -40,7 +40,7 @@
       background-size: 12px 12px
 
     &.decrease16px1, &.decrease16px0,
-    &.discount16px1, &.discount16px,
+    &.discount16px1, &.discount16px0,
     &.special16px1, &.special16px0,
     &.invoice16px1, &.invoice16px0,
     &.guarantee16px1, &.guarantee16px0
