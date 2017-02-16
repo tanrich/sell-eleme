@@ -46,3 +46,41 @@ npm run build --report
 		1. 需要将css类名写在v-show相对应元素下
 		2. enter只加载一瞬间，enter-active属性就会覆盖，所以不能像vue1.0一样写出动画结束样式。只能在默认属性中直接定义。enter-active作用相当于定义transition
 			 
+### 总结
+
+项目基本开发完毕，总结几点：
+
+1. vue组件化开发的思想非常适合现在前端的开发。因为涉及到多人共同开发，还有后期维护，组件化 + es6 + eslint提供了清晰、便利的开发环境。
+
+2. 了解devicepixelratio，了解适用于移动端的flex布局，说实话我原来用float挺多的，现在发现弊端非常多。
+
+3. 还有一个移动端自适应的小技巧：需求是width=height，但width是随着屏幕大小决定。解决方法是`width=100%;height=0;padding-top:0`
+
+3. 小球动画中起着重要作用的`getBoundingClientRect()`，用于获取元素相对于文档视图左上角的距离，返回值是对象，有top，left，right，bottom属性。
+
+4. 	这个项目中起着重要作用的滑动组件[better-scroll](https://github.com/ustbhuangyi/better-scroll)。这个组件是严重依赖于DOM加载，因为他是计算DOM的高度和宽度。所以在vue中调用它的时候，一定要先强制更新DOM(this.$nextTick())。
+
+5. 使用better-scroll这个插件的时候，是屏蔽了click事件的默认行为，所以要设置为true才能派发click事件。
+		
+		import BScroll from 'better-scroll'
+		if(!this._initScroll) {
+			this._initScrll = new BScroll(this.$refs[name],{
+				click: true
+			})
+		} else {
+			this._initScroll.refresh();
+		}
+
+	但如果在桌面端的时候就会触发2次click，解决办法就是点击事件判断event._constructed是否存在
+		
+		if(!event._constructed) {
+			return false;
+		}
+		...
+		
+		
+6. 父组件传入子组件的数据如果为基本数据类型，则数据修改无法映射到父组件，需要`this.$emit(event,value)`手动派发一个事件，父组件接受并处理。反过来父组件调用子组件的方法`this.$refs[父组件].子组件方法`。
+
+7. created和mounted两个生命周期，created声明周期可以监听data数据，mounted生命周期是所有的DOM都已生成，对DOM的操作还有ajax在此执行
+
+8. date
