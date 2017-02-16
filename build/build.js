@@ -1,4 +1,4 @@
-// https://github.com/shelljs/shelljs
+ // https://github.com/shelljs/shelljs
 require('./check-versions')()
 
 process.env.NODE_ENV = 'production'
