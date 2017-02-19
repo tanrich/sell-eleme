@@ -20,8 +20,10 @@ npm run build --report
 
 利用Vue-cli + Webpack搭建环境， 使用Vue2,Vue-router,Vue-resource编写。本人第一个vue项目，意在练手。
 
-### 展示视频
-<video src='./show.mp4' width=150 controls></video>
+### 图片展示
+<img src='./show.png' width=150>
+
+[点击我](http://119.29.113.45:9000/?id=trq#/)
 
 ### 已知问题：
 - 过渡动画JavaScript钩子函数
