@@ -27,7 +27,7 @@
           return
         }
         if (!this.info.count) {
-          Vue.set(this.info, 'count', 1)
+          Vue.set(this.info, 'count', 1);
           this.info.count = 1;
         } else {
           this.info.count++;

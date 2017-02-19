@@ -110,7 +110,6 @@
       },
       _picScroll () {
         if (this.seller.pics) {
-          console.log(this.$refs['pics-list'])
           let width = (PIC_WIDTH + MARGIN) * this.seller.pics.length - MARGIN;
           this.$refs['pics-list'].style.width = width + 'px';
         }

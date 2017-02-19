@@ -180,7 +180,6 @@
             let pos = ball.target.getBoundingClientRect();
             let x = pos.left - 44 + ADJUSTX;
             let y = -(window.innerHeight - pos.top - 16 - ADJUSTY);
-            console.log(x,y)
             el.style.display = '';
             el.style.webkitTransform = `translate3d(0,${y}px,0)`;
             el.style.transform = `translate3d(0,${y}px,0)`;

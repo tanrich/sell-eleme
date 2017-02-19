@@ -103,13 +103,13 @@
       _getSelectType (selectType) {
         this.selectType = selectType;
         this.$nextTick(() => {
-          this.ratingsScroll.refresh();
+          this.scroll.refresh();
         });
       },
       _getOnlyContent (onlyContent) {
         this.onlyContent = onlyContent;
         this.$nextTick(() => {
-          this.ratingsScroll.refresh();
+          this.scroll.refresh();
         });
       },
       _showJudge (type, text) {
