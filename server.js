@@ -7,8 +7,11 @@ var app = express();
 var router = express.Router();
 
 router.get('/', function (req, res, next) {
-  req.url = './index.html';
+  req.url = '/index.html';
   next();
+});
+router.get('/show',function (req, res, next) {
+  res.sendFile(__dirname+'/show.mp4');
 });
 app.use(router);
 
