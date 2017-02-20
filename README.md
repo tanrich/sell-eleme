@@ -21,7 +21,7 @@ npm run build --report
 利用Vue-cli + Webpack搭建环境， 使用Vue2,Vue-router,Vue-resource编写。本人第一个vue项目，意在练手。
 
 ### 展示
-<video src='119.29.113.45:9000/show' width=150 controls></video>
+<video src='http://119.29.113.45:9000/show' width=150 controls></video>
 
 [点击我](http://119.29.113.45:9000/?id=trq#/)
 
