@@ -91,3 +91,9 @@ npm run build --report
 8. created和mounted两个生命周期，created声明周期可以监听data数据，mounted生命周期是所有的DOM都已生成，对DOM的操作还有ajax在此执行
 
 9. 浏览器有一个window.localStorage属性，可以当做前端的数据库使用
+
+
+## LISENCE
+[MIT](https://opensource.org/licenses/MIT)
+
+本项目仅供学习交流
